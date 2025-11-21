@@ -1,0 +1,36 @@
+body {
+    background-color: #ffeef0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.header-box {
+    background: #ffdfe4;
+    border-radius: 20px;
+}
+
+.nav-tabs .nav-link {
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #fff;
+    border-bottom: 3px solid #ff7186;
+}
+
+
+.card {
+    border: none;
+    background: #ffffff;
+}
+
+.card-body h5 {
+    font-weight: 600;
+}
+
+
+.icon-green {
+    color: #27ae60;
+    margin-right: 8px;
+}
