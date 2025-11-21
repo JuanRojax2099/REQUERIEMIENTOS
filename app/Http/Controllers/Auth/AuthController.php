@@ -21,12 +21,16 @@ class AuthController extends Controller
     public function Materias():View{
         
     }
+    public function update(StorePost $request, Post $post):View{
+       $post-update($request->validated());
+       return back()->with('status','Post updated');
+    }
     public function index(): View
     {
         return view('auth.login');
     }  
     public function InfoAcademica():View{
-        return view('info.academica');
+        return view('information.info');
     }
 
     public function registration(): View

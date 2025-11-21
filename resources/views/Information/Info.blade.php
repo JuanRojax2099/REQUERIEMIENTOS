@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,7 +17,7 @@
 <body>
 
 <div class="container mt-3">
-    <a href="#" class="btn btn-light shadow-sm"><i class="bi bi-arrow-left"></i> Volver al Inicio</a>
+    <a href="{{ url('/dashboard') }}" class="btn btn-light shadow-sm"><i class="bi bi-arrow-left"></i> Volver al Inicio</a>
 </div>
 
 <div class="container mt-4">
