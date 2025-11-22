@@ -95,7 +95,7 @@
                 <a class="btn px-5 py-3" id="btn-option" href="{{ route('info') }}" role="button">Información académica</a>
             </div>
             <div class="col-md-4 mb-3">
-                <button class="btn  px-5 py-3" id="btn-option">Matrícula</button>
+                <a class="btn  px-5 py-3" id="btn-option" href="{{ route('asignaturas')}}" role="button">Matrícula</a>
             </div>
         </div>
     </div>

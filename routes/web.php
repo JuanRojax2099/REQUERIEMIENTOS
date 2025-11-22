@@ -11,6 +11,7 @@ Route::get('/', function () {
 Route::get('/dashboard/info',function(){
     return view('Info');
 });
+Route::get('/dashboard/matricula',[AuthController::class,'InfoMatricula'])->name('asignaturas');
 Route::get('/dashboard/info',[AuthController::class,'InfoAcademica'])->name('info');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 

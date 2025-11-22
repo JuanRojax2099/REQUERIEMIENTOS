@@ -18,9 +18,24 @@ class AuthController extends Controller
      *
      * @return response()
      */
-    public function Materias():View{
+    public function InfoMatricula(): View
+    {
+        return view('information.SubjectResume');
+    }
+    /*InfoMatricula es la información general de la matricula del estudiante
+      SelectSubjects() la defini como la interfaz donde veras las asignaturas
+      disponibles y su respectivos horarios.  
+    */
+    public function SelectSubjects():View{
+        return view('informaton.Matricula');
+    }
+    /** Esta funcion traera la información de las materias
+     * disponibles para el estudiante
+    */
+    public function ConsultSubjects(){
         
     }
+    /** */
     public function update(StorePost $request, Post $post):View{
        $post-update($request->validated());
        return back()->with('status','Post updated');
@@ -32,7 +47,9 @@ class AuthController extends Controller
     public function InfoAcademica():View{
         return view('information.info');
     }
-
+    /*
+      Las view como tal no son contradoles, sino la asignación de vistas segun
+      la ruta activada dentro el archivo web.php */
     public function registration(): View
     {
         return view('auth.registration');
