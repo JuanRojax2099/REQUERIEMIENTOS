@@ -16,12 +16,12 @@ Route::get('/dashboard/info',function(){
 Route::get('/schedule', [PerfilController::class, 'schedule'])
      ->middleware('auth')
      ->name('Schedule');
-Route::get('/matricular-asignatura', [PerfilController::class, 'matricularAsignatura'])
-    ->name('Matricula');
+Route::post('/matricular-asignatura', [PerfilController::class, 'matricularAsignatura'])
+    ->name('matricular.asignatura');
 
-/*Route::get('/MatricularMateria', [PerfilController::class, 'newAsignaturas'])
+Route::get('/MatricularMateria', [PerfilController::class, 'newAsignaturas'])
      ->middleware('auth')
-     ->name('Matricula');*/
+     ->name('Matricula');
 Route::get('/dashboard/Resume',[PerfilController::class,'subjectResume'])->name('SubjectResume');
 Route::get('/dashboard/info',[AuthController::class,'InfoAcademica'])->name('info');
 Route::get('login', [AuthController::class, 'index'])->name('login');
