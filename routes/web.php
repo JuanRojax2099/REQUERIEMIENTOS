@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Subjects\PerfilController;
 
 
 Route::get('/', function () {
@@ -11,7 +12,17 @@ Route::get('/', function () {
 Route::get('/dashboard/info',function(){
     return view('Info');
 });
-Route::get('/dashboard/matricula',[AuthController::class,'InfoMatricula'])->name('asignaturas');
+
+Route::get('/schedule', [PerfilController::class, 'schedule'])
+     ->middleware('auth')
+     ->name('Schedule');
+Route::get('/matricular-asignatura', [PerfilController::class, 'matricularAsignatura'])
+    ->name('Matricula');
+
+/*Route::get('/MatricularMateria', [PerfilController::class, 'newAsignaturas'])
+     ->middleware('auth')
+     ->name('Matricula');*/
+Route::get('/dashboard/Resume',[PerfilController::class,'subjectResume'])->name('SubjectResume');
 Route::get('/dashboard/info',[AuthController::class,'InfoAcademica'])->name('info');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 

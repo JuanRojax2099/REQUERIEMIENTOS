@@ -1,27 +1,26 @@
- .header-red {
-            background-color: #e40000;
-            color: white;
-            padding: 20px 0;
-        }
+.card {
+    border-radius: 14px;
+}
 
-        .tab-btn {
-            background: #f3f3f3;
-            border-radius: 20px;
-            padding: 6px 16px;
-            font-weight: 500;
-            border: none;
-        }
+.card h5 {
+    font-size: 1.1rem;
+}
 
-        .tab-btn.active {
-            background: #d9d9d9;
-        }
+.card button {
+    background: #000;
+    border: none;
+    transition: 0.2s;
+}
 
-        .search-box {
-            border-radius: 10px;
-            height: 40px;
-        }
-
-        .filter-select {
-            border-radius: 10px;
-            height: 40px;
-        }
+.card button:hover {
+    background: #333;
+    transform: scale(1.02);
+}
+.header-red {
+    background-color: #d60000 !important;
+    color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
