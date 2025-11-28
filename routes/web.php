@@ -9,20 +9,20 @@ use App\Http\Controllers\Subjects\PerfilController;
 Route::get('/', function () {
     return view('Welcome');
 });
-Route::get('/dashboard/info',function(){
-    return view('Info');
-});
 
 Route::get('/schedule', [PerfilController::class, 'schedule'])
      ->middleware('auth')
      ->name('Schedule');
-Route::get('/matricular-asignatura', [PerfilController::class, 'matricularAsignatura'])
-    ->name('Matricula');
+Route::post('/matricular-asignatura', 
+    [PerfilController::class, 'matricularAsignatura']
+)->name('matricular.asignatura');
+// Nota: middleware('auth') es aplicado automáticamente por Laravel en el grupo de rutas autenticadas
 
-/*Route::get('/MatricularMateria', [PerfilController::class, 'newAsignaturas'])
+
+Route::get('/matricular-materia', [PerfilController::class, 'newAsignaturas'])
      ->middleware('auth')
-     ->name('Matricula');*/
-Route::get('/dashboard/Resume',[PerfilController::class,'subjectResume'])->name('SubjectResume');
+     ->name('Matricula');
+Route::get('/dashboard/resume',[PerfilController::class,'subjectResume'])->name('SubjectResume');
 Route::get('/dashboard/info',[AuthController::class,'InfoAcademica'])->name('info');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 

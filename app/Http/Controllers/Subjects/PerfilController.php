@@ -6,8 +6,11 @@ namespace App\Http\Controllers\Subjects;
 use App\Http\Controllers\Controller;
 use App\Models\Matricula;
 use App\Models\Programa;
+use App\Models\Asignatura;
+use App\Models\MateriasMatriculadas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 /*Controller de matriculas
 el Controller para el perfil es de SubjectsController.php en Controllers/Subjects*/
 class PerfilController extends Controller
@@ -90,30 +93,37 @@ public function schedule()
 }
 public function matricularAsignatura(Request $request)
 {
-    $user = Auth::user();
+    try {
+        $user = Auth::user();
 
-    $request->validate([
-        'id_asignatura' => 'required|integer|exists:asignaturas,id'
-    ]);
+        $request->validate([
+            'id_asignatura' => 'required|integer|exists:asignaturas,id'
+        ]);
 
-    // Verifica que no esté matriculado ya
-    $existe = MateriasMatriculadas::where('id_usuario', $user->id)
-        ->where('id_asignatura', $request->id_asignatura)
-        ->first();
+        // Obtener matrícula del estudiante
+        $matricula = Matricula::where('id_usuarios', $user->id)->firstOrFail();
 
-    if ($existe) {
-        return response()->json(['error' => 'La asignatura ya está matriculada'], 409);
+        // Verifica que no esté matriculado ya
+        $existe = MateriasMatriculadas::where('id_matricula', $matricula->id_matricula)
+            ->where('id_asignatura', $request->id_asignatura)
+            ->first();
+
+        if ($existe) {
+            return response()->json(['error' => 'La asignatura ya está matriculada'], 409);
+        }
+
+        // Crear registro en materias_matriculadas
+        MateriasMatriculadas::create([
+            'id_matricula' => $matricula->id_matricula,
+            'id_asignatura' => $request->id_asignatura
+        ]);
+
+        return response()->json(['success' => 'Asignatura matriculada correctamente']);
+    } catch (\Exception $e) {
+        \Log::error('Error en matricularAsignatura: ' . $e->getMessage());
+        \Log::error($e->getTraceAsString());
+        return response()->json(['error' => $e->getMessage()], 500);
     }
-
-    $matricula = Matricula::where('id_usuarios', $user->id)->first();
-
-    MateriasMatriculadas::create([
-        'id_usuario' => $user->id,
-        'id_asignatura' => $request->id_asignatura,
-        'semestre' => $matricula->semestre_cursado
-    ]);
-
-    return response()->json(['success' => 'Asignatura matriculada correctamente']);
 }
 
 }
