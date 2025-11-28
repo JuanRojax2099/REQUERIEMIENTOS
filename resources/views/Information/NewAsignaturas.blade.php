@@ -373,6 +373,12 @@
         function matricular(idAsignatura, nombreAsignatura, creditos) {
             const btn = document.getElementById('btn-' + idAsignatura);
 
+            // Si ya está deshabilitado, no hacer nada
+            if (btn.disabled) {
+                alert('⚠️ Esta asignatura ya está matriculada');
+                return;
+            }
+
             fetch("{{ route('matricular.asignatura') }}", {
                 method: "POST",
                 headers: {
@@ -387,6 +393,10 @@
             .then(data => {
                 if (data.error) {
                     alert('⚠️ ' + data.error);
+                    // Deshabilitar el botón para indicar que ya fue matriculada
+                    btn.innerText = "Matriculada";
+                    btn.classList.add("disabled");
+                    btn.disabled = true;
                     return;
                 }
 
@@ -401,11 +411,11 @@
                 // Habilitar confirmar
                 document.getElementById("btnConfirmar").disabled = false;
 
-                alert('✓ Asignatura matriculada correctamente');
+                alert('✓ ' + nombreAsignatura + ' matriculada correctamente');
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('❌ Error en la solicitud');
+                alert('❌ Error en la solicitud. Por favor intenta nuevamente.');
             });
         }
     </script>
